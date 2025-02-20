@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 import { doc, getDoc } from "firebase/firestore";
-import { db } from "../../../../firebaseConfig";
+import { db } from "@/firebase/config";
 import { cutString, getReadingTimeInMinutes } from "@/utils/utils";
 
 export async function GET(request: Request) {

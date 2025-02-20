@@ -21,7 +21,7 @@ import {
   getDocs,
   writeBatch,
 } from "firebase/firestore";
-import { db } from "../../../firebaseConfig";
+import { db } from "@/firebase/config";
 import toast from "react-hot-toast";
 
 type Props = {

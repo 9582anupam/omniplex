@@ -1,15 +1,16 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setAuthState, setUserDetailsState } from "@/store/authSlice";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "@/firebase/config";
 
 const AuthWrapper = ({ children }: { children: React.ReactNode }) => {
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const auth = getAuth();
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         dispatch(setAuthState(true));
@@ -22,12 +23,18 @@ const AuthWrapper = ({ children }: { children: React.ReactNode }) => {
           })
         );
       } else {
+        dispatch(setAuthState(false));
         console.log("User is signed out");
       }
+      setLoading(false);
     });
 
     return () => unsubscribe();
   }, [dispatch]);
+
+  if (loading) {
+    return <div>Loading...</div>; // You can replace this with a proper loading component
+  }
 
   return <>{children}</>;
 };

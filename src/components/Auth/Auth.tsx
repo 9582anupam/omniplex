@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { setAuthState, setUserDetailsState } from "@/store/authSlice";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { doc, getDoc, setDoc, serverTimestamp } from "firebase/firestore";
-import { db } from "../../../firebaseConfig";
+import { db } from "@/firebase/config";
 import Spinner from "../Spinner/Spinner";
 
 type Props = {
